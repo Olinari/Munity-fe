@@ -3,7 +3,8 @@ import styled from "styled-components";
 interface FlexProps {
   direction?: string;
   justifyContent?: string;
-  gap: Number;
+  gap?: Number;
+  alignItems?: string;
 }
 
 export const FlexBox = styled.div`

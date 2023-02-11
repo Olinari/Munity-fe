@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import React from "react";
+import { ReactNode } from "react";
 import { Logo } from "./logo";
 
-const Topbar = ({ children = null }) => (
+const Topbar = ({ children }: { children?: ReactNode }) => (
   <Topbar.Container>
     <Logo />
     {children}

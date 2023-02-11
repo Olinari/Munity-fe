@@ -17,6 +17,8 @@ export const GroupActivitySummary = ({ groupId }: { groupId: string }) => {
     ? getHourOfDay(indexOfMaxValue(group.messagesDisterbution))
     : null;
 
+  console.log(group);
+
   return (
     <>
       {isGroupLoading ? (
@@ -44,7 +46,13 @@ export const GroupActivitySummary = ({ groupId }: { groupId: string }) => {
             <ActivityBox>
               <Title> Top Contributer</Title>
               <FlexBox gap={8}>
-                <Avatar size={32} avatarUrl={group.adminProfilePic} />
+                <Avatar
+                  size={32}
+                  avatarUrl={
+                    group.participants?.[group.topContributorIndex]
+                      ?.profilePicUrl
+                  }
+                />
               </FlexBox>
             </ActivityBox>
             <ActivityBox>
