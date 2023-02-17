@@ -55,9 +55,11 @@ export const GroupActivitySummary = ({ groupData }: { groupData: GroupChat }) =>
 GroupActivitySummary.Container = styled.div`
   display: flex;
   gap: 50px;
+  margin-top: 12px;
+  border-top: 1px solid #ffffff1c;
   border-bottom: 1px solid #ffffff1c;
-  height: 104px;
-  padding: 16px 0;
+  height: 96px;
+  padding: 16px;
 `;
 
 const ActivityBox = styled.div`
