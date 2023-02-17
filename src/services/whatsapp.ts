@@ -26,7 +26,8 @@ export const getGroupData = async (groupId: string) => {
 
 export const getDailyGroupData = async (groupId: string, day: Date) => {
   const response = await axios.get(`${baseUrl}/group-daily-data`, {
-    params: { groupId, day },
+    params: { groupId, date: day },
   });
+
   return response.data;
 };

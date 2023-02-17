@@ -16,7 +16,7 @@ export const Loader = () => (
         'var(--color-blue)',
         'var(--color-yellow)',
         'var(--color-purple)',
-        'var(--color-gray-1)',
+        'var(--color-pale-purple)',
       ]}
     />
   </Container>

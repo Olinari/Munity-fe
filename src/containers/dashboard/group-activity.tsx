@@ -21,7 +21,7 @@ export const GroupActivityContent = ({ groupData }: { groupData: GroupChat }) =>
       </TabPanel>
       <TabPanel>
         <LocalizationProvider dateAdapter={AdapterMoment}>
-          <DailyActivity key={groupData._id} />
+          <DailyActivity groupId={groupData?._id} />
         </LocalizationProvider>
       </TabPanel>
     </Tabs>

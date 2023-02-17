@@ -18,15 +18,15 @@ export const GroupActivitySummary = ({ groupData }: { groupData: GroupChat }) =>
         <Title>Community</Title>
         {}
         <FlexLayout gap={5} align={'center'}>
-          <Icon name={groupData.vendor ?? 'Whatsapp'} />
-          <Paragraph>{groupData.subject}</Paragraph>
+          <Icon name={groupData?.vendor ?? 'Whatsapp'} />
+          <Paragraph>{groupData?.subject}</Paragraph>
         </FlexLayout>
       </ActivityBox>
       <ActivityBox>
-        <Title>Total messages sent</Title> <Paragraph>{groupData.messages}</Paragraph>
+        <Title>Total messages sent</Title> <Paragraph>{groupData?.messages}</Paragraph>
       </ActivityBox>
       <ActivityBox>
-        <Title> Active participants</Title> <Paragraph>{groupData.participants?.length}</Paragraph>
+        <Title> Active participants</Title> <Paragraph>{groupData?.participants?.length}</Paragraph>
       </ActivityBox>
       {peakHours && (
         <ActivityBox>
@@ -38,7 +38,7 @@ export const GroupActivitySummary = ({ groupData }: { groupData: GroupChat }) =>
         <FlexLayout gap={8}>
           <Avatar
             size={28}
-            avatarUrl={groupData.participants?.[groupData.topContributorIndex]?.profilePicUrl}
+            avatarUrl={groupData?.participants?.[groupData.topContributorIndex]?.profilePicUrl}
           />
         </FlexLayout>
       </ActivityBox>

@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { AxisOptions, Chart } from 'react-charts';
 import { Heading } from '@/components/typography';
 import { getHourOfDay } from '@/utils/time-utils';
+import _ from 'lodash';
 
 export const ActivityChart = styled(({ data, type = 'bar', label = '', title, ...props }) => {
   const chartData = data
@@ -32,13 +33,15 @@ export const ActivityChart = styled(({ data, type = 'bar', label = '', title, ..
   return (
     <div {...props}>
       <Heading>{title}</Heading>
-      <Chart
-        options={{
-          data: [{ label, data: chartData }],
-          primaryAxis,
-          secondaryAxes,
-        }}
-      />
+      {!_.isEmpty(data) && (
+        <Chart
+          options={{
+            data: [{ label, data: chartData }],
+            primaryAxis,
+            secondaryAxes,
+          }}
+        />
+      )}
     </div>
   );
 })`
