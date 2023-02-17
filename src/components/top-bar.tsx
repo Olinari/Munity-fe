@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { ReactNode } from "react";
-import { Logo } from "./logo";
+import styled from 'styled-components';
+import { ReactNode } from 'react';
+import { Logo } from './logo';
 
 const Topbar = ({ children }: { children?: ReactNode }) => (
   <Topbar.Container>
@@ -13,7 +13,7 @@ Topbar.Container = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 24px 0;
+  padding: 25px 0;
 `;
 
 export default Topbar;

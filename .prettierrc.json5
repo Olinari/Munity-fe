@@ -1,0 +1,13 @@
+{
+  printWidth: 100,
+  singleQuote: true,
+  arrowParens: 'avoid',
+  bracketSameLine: true,
+  importOrder: [
+    '^@src-v2/(.*)$',
+    '^@src/(.*)$',
+    '^[./]'
+  ],
+  importOrderSortSpecifiers: true,
+  importOrderSeparation: false,
+}

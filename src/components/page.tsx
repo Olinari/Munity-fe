@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import Topbar from "./top-bar";
+import { ReactNode } from 'react';
+import styled from 'styled-components';
+import Topbar from './top-bar';
 
-const Page = ({ children }) => {
+const Page = ({ children }: { children: ReactNode }) => {
   return (
     <PageContainer>
       <Topbar />
@@ -14,7 +14,10 @@ const Page = ({ children }) => {
 export default Page;
 
 const PageContainer = styled.section`
-  height: 100vh;
+  height: calc(100vh);
   background-color: var(--color-dark-blue);
   padding: 0px 60px;
+
+  ${Topbar.Container} {
+  }
 `;
