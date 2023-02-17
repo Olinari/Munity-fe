@@ -2,6 +2,7 @@ import Page from '@/components/page';
 import { useQuery } from 'react-query';
 import { getGroupsData } from '@/services/whatsapp';
 import { NavLink } from 'react-router-dom';
+import { GroupChat } from '@/pages/dashboard';
 
 export default () => {
   const { data: groups, isLoading: isGroupsLoading } = useQuery(
@@ -11,7 +12,9 @@ export default () => {
   console.log(groups);
   return (
     <Page>
-      {isGroupsLoading ? 'Loading Groups' : groups.map?.(group => <Group {...group}></Group>)}
+      {isGroupsLoading
+        ? 'Loading Groups'
+        : groups.map?.((group: GroupChat) => <Group {...group}></Group>)}
     </Page>
   );
 };

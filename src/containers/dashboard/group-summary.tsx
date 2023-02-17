@@ -1,20 +1,26 @@
 import styled from 'styled-components';
 import { Paragraph, Title } from '@/components/typography';
 import { Avatar } from '@/components/avatars/avatar';
-import { FlexBox } from '@/components/layout';
+import { FlexLayout } from '@/components/layout/flex-layout';
 import { getHourOfDay } from '@/utils/time-utils';
 import { indexOfMaxValue } from '@/utils/array-utils';
 import { GroupChat } from '@/pages/dashboard';
+import Icon from '@/components/icons/icon';
 
 export const GroupActivitySummary = ({ groupData }: { groupData: GroupChat }) => {
-  const peakHours = groupData?.messagesDisterbution
-    ? getHourOfDay(indexOfMaxValue(groupData.messagesDisterbution))
+  const peakHours = groupData?.messagesDistribution
+    ? getHourOfDay(indexOfMaxValue(groupData.messagesDistribution))
     : null;
 
   return (
     <GroupActivitySummary.Container>
       <ActivityBox>
-        <Title>Community</Title> <Paragraph>{groupData.subject}</Paragraph>
+        <Title>Community</Title>
+        {}
+        <FlexLayout gap={5} align={'center'}>
+          <Icon name={groupData.vendor ?? 'Whatsapp'} />
+          <Paragraph>{groupData.subject}</Paragraph>
+        </FlexLayout>
       </ActivityBox>
       <ActivityBox>
         <Title>Total messages sent</Title> <Paragraph>{groupData.messages}</Paragraph>
@@ -29,18 +35,18 @@ export const GroupActivitySummary = ({ groupData }: { groupData: GroupChat }) =>
       )}
       <ActivityBox>
         <Title> Top Contributer</Title>
-        <FlexBox gap={8}>
+        <FlexLayout gap={8}>
           <Avatar
-            size={32}
+            size={28}
             avatarUrl={groupData.participants?.[groupData.topContributorIndex]?.profilePicUrl}
           />
-        </FlexBox>
+        </FlexLayout>
       </ActivityBox>
       <ActivityBox>
         <Title> Admin</Title>
-        <FlexBox gap={8}>
-          <Avatar size={32} avatarUrl={groupData.adminProfilePic} />
-        </FlexBox>
+        <FlexLayout gap={8}>
+          <Avatar size={28} avatarUrl={groupData.adminProfilePic} />
+        </FlexLayout>
       </ActivityBox>
     </GroupActivitySummary.Container>
   );
@@ -49,23 +55,30 @@ export const GroupActivitySummary = ({ groupData }: { groupData: GroupChat }) =>
 GroupActivitySummary.Container = styled.div`
   display: flex;
   gap: 50px;
+  border-bottom: 1px solid #ffffff1c;
+  height: 104px;
+  padding: 16px 0;
 `;
 
 const ActivityBox = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+  height: 32px;
 
   ${Title} {
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 600;
-    margin-bottom: 12px;
+
     color: var(--color-gray-1);
     white-space: nowrap;
   }
 
   ${Paragraph} {
-    font-size: 30px;
+    font-size: 22px;
+    font-weight: 400;
     white-space: nowrap;
   }
 `;

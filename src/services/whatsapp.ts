@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
+const baseUrl = (import.meta as any).env.VITE_BASE_URL;
 
 export const getAgentAuthData = async () => {
   const response = await axios.get(`${baseUrl}/connect-agent`);
@@ -17,14 +17,16 @@ export const getGroupsData = async () => {
   return response.data;
 };
 
-export const getGroupData = async (groupId) => {
+export const getGroupData = async (groupId: string) => {
   const response = await axios.get(`${baseUrl}/group-data`, {
     params: { groupId },
   });
   return response.data;
 };
 
-export const getTimelineData = async () => {
-  const response = await axios.get(`${baseUrl}/timeline-data`);
+export const getDailyGroupData = async (groupId: string, day: Date) => {
+  const response = await axios.get(`${baseUrl}/group-daily-data`, {
+    params: { groupId, day },
+  });
   return response.data;
 };

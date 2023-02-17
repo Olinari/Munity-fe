@@ -11,9 +11,9 @@ const Topbar = ({ children }: { children?: ReactNode }) => (
 
 Topbar.Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
-  padding: 25px 0;
+  padding: 24px 0 8px 0;
 `;
 
 export default Topbar;

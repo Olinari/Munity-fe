@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { useQuery } from "react-query";
-import { getAgentAuthData, secureConnection } from "../../services/whatsapp";
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useQuery } from 'react-query';
+import { getAgentAuthData, secureConnection } from '../../services/whatsapp';
 
-import Page from "../../components/page";
+import Page from '../../components/page';
 
 export default () => {
-  const [stage, setStage] = useState(0);
-  const [onboardingData, setonboardingData] = useState(null);
-
-  const { data: authData, isLoading } = useQuery("authData", getAgentAuthData);
+  const { data: authData, isLoading } = useQuery('authData', getAgentAuthData);
   const [connectionSuccess, setSuccess] = useState(false);
 
   const verifyConneciton = async () => {
@@ -25,7 +22,7 @@ export default () => {
   useEffect(() => {
     if (authData) {
       const intervalId = setInterval(() => {
-        verifyConneciton().then((data) => {
+        verifyConneciton().then(data => {
           if (data?.connected) {
             clearInterval(intervalId);
             setSuccess(true);
@@ -39,16 +36,16 @@ export default () => {
     <Page>
       <ContentContainer>
         {connectionSuccess ? (
-          "Success!"
+          'Success!'
         ) : (
           <>
             {isLoading ? (
-              "loading..."
+              'loading...'
             ) : (
               <>
                 <Description>
-                  Scan This Qr code using whatsapp (Link a device) on the agent
-                  device👁 you would like to track
+                  Scan This Qr code using whatsapp (Link a device) on the agent device👁 you would
+                  like to track
                 </Description>
                 <Qr>{authData.qr}</Qr>
               </>
@@ -69,7 +66,7 @@ const ContentContainer = styled.div`
 `;
 
 const Qr = styled.div`
-  font-family: "menlo";
+  font-family: 'menlo';
   margin-top: 24px;
   font-size: 10px;
   transform: scaleY(1.2);

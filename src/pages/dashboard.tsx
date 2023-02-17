@@ -5,21 +5,22 @@ import { useQuery } from 'react-query';
 import { getGroupData } from '@/services/whatsapp';
 import { Loader } from '@/components/loader';
 import styled from 'styled-components';
-import { AxisOptions, Chart } from 'react-charts';
-import React, { useMemo } from 'react';
+import React from 'react';
+import { GroupActivityContent } from '@/containers/dashboard/group-activity';
 
 export interface GroupChat {
   _id: string;
   name: string;
   __v: number;
   adminProfilePic: string;
-  messagesDisterbution: number[];
+  messagesDistribution: number[];
   ownerPhone: string;
   ownerSerialized: string;
   participants: Participant[];
   subject: string;
   messages: number;
   topContributorIndex: number;
+  vendor?: string;
 }
 
 interface Participant {
@@ -32,76 +33,26 @@ interface Participant {
 
 export default () => {
   const { key } = useParams();
-  const { data: group, isLoading: isGroupLoading } = useQuery(
-    'group',
-    async () => await getGroupData(key),
-    { refetchInterval: 10000 }
-  );
+  if (key) {
+    const { data: group, isLoading: isGroupLoading } = useQuery(
+      'group',
+      async () => await getGroupData(key),
+      { refetchInterval: 10000 }
+    );
 
-  return (
-    <Page>
-      {isGroupLoading ? (
-        <Loader />
-      ) : (
-        <DashboardContainer>
-          <GroupActivitySummary groupData={group} />
-          <GroupDataContent data={group?.messagesDisterbution} />
-        </DashboardContainer>
-      )}
-    </Page>
-  );
-};
-
-const Line = styled(({ data, ...props }) => {
-  const primaryAxis = useMemo<AxisOptions<(typeof data)[number]['data'][number]>>(
-    () => ({
-      getValue: datum => datum.primary as unknown as Date,
-    }),
-    []
-  );
-
-  const secondaryAxes = useMemo<AxisOptions<(typeof data)[number]['data'][number]>[]>(
-    () => [
-      {
-        getValue: datum => datum.secondary,
-        elementType: 'bar',
-      },
-    ],
-    []
-  );
-
-  return (
-    <div {...props}>
-      <Chart
-        options={{
-          data: [{ label: 'shit', data }],
-          primaryAxis,
-          secondaryAxes,
-        }}
-      />
-    </div>
-  );
-})`
-  height: 500px;
-  width: 500px;
-
-  text {
-    fill: white !important;
+    return (
+      <Page>
+        {isGroupLoading ? (
+          <Loader />
+        ) : (
+          <DashboardContainer>
+            <GroupActivitySummary groupData={group} />
+            <GroupActivityContent groupData={group} />
+          </DashboardContainer>
+        )}
+      </Page>
+    );
   }
-
-  line {
-    fill: white !important;
-    stroke: #ffffff11;
-  }
-`;
-
-const GroupDataContent = ({ data: messageByHour }) => {
-  const data = messageByHour.map((messages, hour) => ({
-    primary: `${String(hour).padStart(2, '0')}:00`,
-    secondary: messages,
-  }));
-
-  return <Line data={data}></Line>;
 };
 
 const DashboardContainer = styled.section`
@@ -109,7 +60,7 @@ const DashboardContainer = styled.section`
   height: calc(100% - var(--topbar-height));
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: 120px 1fr;
   grid-template-areas:
     'header'
     'main';
