@@ -1,12 +1,11 @@
 import { Heading } from '@/components/typography';
 import { Tab, TabList, TabPanel, Tabs } from '@/components/layout/tabs';
 import React from 'react';
-import { ActivityChart } from '@/components/graphs/ActivityChart';
+import { HourDistributionChart } from '@/components/graphs/hour-distribution-chart';
 import { GroupChat } from '@/pages/dashboard';
 import styled from 'styled-components';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DailyActivity } from '@/containers/dashboard/daily-activity';
+import { WeeklyActivity } from '@/containers/dashboard/weekly-actvity';
 
 export const GroupActivityContent = ({ groupData }: { groupData: GroupChat }) => (
   <Container>
@@ -15,14 +14,18 @@ export const GroupActivityContent = ({ groupData }: { groupData: GroupChat }) =>
       <TabList>
         <Tab>All Time</Tab>
         <Tab>Daily</Tab>
+        <Tab>Weekly</Tab>
+        <Tab>Monthly</Tab>
+        <Tab>Yearly</Tab>
       </TabList>
       <TabPanel>
-        <ActivityChart data={groupData?.messagesDistribution} title={'Message Frequency'} />
+        <HourDistributionChart data={groupData?.messagesDistribution} title={'Message Frequency'} />
       </TabPanel>
       <TabPanel>
-        <LocalizationProvider dateAdapter={AdapterMoment}>
-          <DailyActivity groupId={groupData?._id} />
-        </LocalizationProvider>
+        <DailyActivity groupId={groupData?._id} />
+      </TabPanel>
+      <TabPanel>
+        <WeeklyActivity groupId={groupData?._id} />
       </TabPanel>
     </Tabs>
   </Container>
@@ -30,7 +33,8 @@ export const GroupActivityContent = ({ groupData }: { groupData: GroupChat }) =>
 
 const Container = styled.div`
   > ${Heading} {
-    font-size: 32px;
-    margin-bottom: 8px;
+    margin-top: 4px;
+    font-size: 28px;
+    font-weight: 600;
   }
 `;

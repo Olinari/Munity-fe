@@ -36,3 +36,21 @@ export function getHourOfDay(hourNumber: number) {
     (hour + 1) % 12 === 0 ? 12 : (hour + 1) % 12
   }:00 ${period}`;
 }
+
+export function getDayOfWeek(dayNumber: number) {
+  if (dayNumber < 1 || dayNumber > 7) {
+    console.error('Invalid hour number, must be between 1 and 7');
+    return null;
+  }
+
+  const daysofTheWeek = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  return daysofTheWeek[dayNumber - 1];
+}

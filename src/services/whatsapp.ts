@@ -28,6 +28,13 @@ export const getDailyGroupData = async (groupId: string, day: Date) => {
   const response = await axios.get(`${baseUrl}/group-daily-data`, {
     params: { groupId, date: day },
   });
+  return response.data;
+};
 
+export const getWeeklyGroupData = async (groupId: string, startDay: Date) => {
+  const response = await axios.get(`${baseUrl}/group-weekly-data`, {
+    params: { groupId, date: startDay },
+  });
+  console.log(response.data);
   return response.data;
 };

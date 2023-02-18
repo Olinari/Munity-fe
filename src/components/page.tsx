@@ -18,7 +18,4 @@ const PageContainer = styled.section`
   background-color: var(--color-dark-blue);
   padding: 0px 60px;
   overflow: scroll;
-
-  ${Topbar.Container} {
-  }
 `;

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import { getDailyGroupData } from '@/services/whatsapp';
-import { DatePicker } from '@mui/x-date-pickers';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { TextField } from '@mui/material';
-import { ActivityChart } from '@/components/graphs/ActivityChart';
+import { HourDistributionChart } from '@/components/graphs/hour-distribution-chart';
 import { Loader } from '@/components/loader';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 export const DailyActivity = ({ groupId }: { groupId: string }) => {
   const [day, setDay] = useState(new Date());
@@ -16,30 +17,25 @@ export const DailyActivity = ({ groupId }: { groupId: string }) => {
       refetchInterval: 10000,
     }
   );
-  const queryClient = useQueryClient();
-
-  useEffect(() => {}, [day]);
 
   return (
-    <>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
       <DatePicker
         label="Choose Date"
         maxDate={new Date()}
         value={day}
         onChange={newValue => {
           newValue && setDay(newValue);
-          queryClient.invalidateQueries({ queryKey: ['groupDay'] });
         }}
         renderInput={params => <TextField {...params} />}
       />
-
       {!isLoading && !dailyData?.messagesDistribution ? (
         <div>No Data Available</div>
       ) : !isLoading && dailyData?.messagesDistribution ? (
-        <ActivityChart data={dailyData?.messagesDistribution} title={'Message Frequency'} />
+        <HourDistributionChart data={dailyData?.messagesDistribution} title={'Message Frequency'} />
       ) : (
         <Loader />
       )}
-    </>
+    </LocalizationProvider>
   );
 };

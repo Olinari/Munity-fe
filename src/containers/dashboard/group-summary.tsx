@@ -16,7 +16,6 @@ export const GroupActivitySummary = ({ groupData }: { groupData: GroupChat }) =>
     <GroupActivitySummary.Container>
       <ActivityBox>
         <Title>Community</Title>
-        {}
         <FlexLayout gap={5} align={'center'}>
           <Icon name={groupData?.vendor ?? 'Whatsapp'} />
           <Paragraph>{groupData?.subject}</Paragraph>
@@ -67,7 +66,17 @@ const ActivityBox = styled.div`
   flex-direction: column;
   gap: 10px;
   justify-content: space-between;
-  height: 32px;
+  position: relative;
+
+  &:hover:after {
+    content: '';
+    background-color: #ffffff1c;
+    width: calc(100% + 32px);
+    height: 96px;
+    position: absolute;
+    top: -16px;
+    left: -16px;
+  }
 
   ${Title} {
     font-size: 12px;
@@ -79,8 +88,8 @@ const ActivityBox = styled.div`
   }
 
   ${Paragraph} {
-    font-size: 22px;
-    font-weight: 400;
+    font-size: 24px;
+    font-weight: 500;
     white-space: nowrap;
   }
 `;
