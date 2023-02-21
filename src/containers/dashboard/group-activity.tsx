@@ -15,8 +15,6 @@ export const GroupActivityContent = ({ groupData }: { groupData: GroupChat }) =>
         <Tab>All Time</Tab>
         <Tab>Daily</Tab>
         <Tab>Weekly</Tab>
-        <Tab>Monthly</Tab>
-        <Tab>Yearly</Tab>
       </TabList>
       <TabPanel>
         <HourDistributionChart data={groupData?.messagesDistribution} title={'Message Frequency'} />

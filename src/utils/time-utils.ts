@@ -1,27 +1,12 @@
-import { format } from 'date-fns';
-
-export function isValidDate(date: Date) {
-  return (
-    (date instanceof Date || typeof date === 'string' || typeof date === 'number') &&
-    !new Date(date)
-  );
-}
-
-export function formatDate(date: Date, timeframe: 'quarterly' | 'weekly' | 'daily') {
-  if (!(date instanceof Date)) {
-    date = new Date(date);
-  }
-  switch (timeframe) {
-    case 'quarterly':
-      return format(date, 'QQQ yyyy');
-    case 'weekly':
-      return format(date, 'MMM d');
-    case 'daily':
-      return format(date, 'MMMM dd, yyyy');
-    default:
-      return date.toLocaleDateString();
-  }
-}
+const daysOfTheWeek = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+] as const;
 
 export function getHourOfDay(hourNumber: number) {
   if (hourNumber < 0 || hourNumber > 23) {
@@ -43,14 +28,5 @@ export function getDayOfWeek(dayNumber: number) {
     return null;
   }
 
-  const daysofTheWeek = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
-  return daysofTheWeek[dayNumber - 1];
+  return daysOfTheWeek[dayNumber - 1];
 }
