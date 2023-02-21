@@ -80,3 +80,9 @@ select {
     background: var(--color-dark-blue) !important;
     color: white !important;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: color 5000s, background-color 5000s ease-in-out 0s;
+    color: white !important;
+}

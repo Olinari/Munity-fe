@@ -14,7 +14,7 @@ export default () => {
     <Page>
       {isGroupsLoading
         ? 'Loading Groups'
-        : groups.map?.((group: GroupChat) => <Group {...group}></Group>)}
+        : groups?.map?.((group: GroupChat) => <Group {...group}></Group>)}
     </Page>
   );
 };

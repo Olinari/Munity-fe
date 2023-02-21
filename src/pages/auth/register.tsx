@@ -1,14 +1,19 @@
-import { ReactNode } from 'react';
 import Page from '@/components/page';
 import { FormControl } from '@/components/forms/form';
 import { InputControl } from '@/components/forms/controls';
-import styled from 'styled-components';
-import { Button } from '@mui/material';
+import { Button, Link } from '@mui/material';
 import { registerUser } from '@/services/auth';
+import { Heading } from '@/components/typography';
+import { AuthLayout, RedirectToForm } from '@/pages/auth/common-components';
+import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
-  const handleSubmit = async data => {
-    await registerUser(data);
+  const navigate = useNavigate();
+  const handleSubmit = async (data: { username: string; password: string }) => {
+    const { error, ok } = await registerUser(data);
+    if (ok) {
+      navigate('/login');
+    }
   };
 
   return (
@@ -20,33 +25,21 @@ export const Register = () => {
   );
 };
 
-const AuthLayout = ({ children }: { children: ReactNode }) => (
-  <AuthContainer> {children}</AuthContainer>
-);
-
-const ResigterForm = ({ handleSubmit }) => {
+const ResigterForm = ({ handleSubmit }: { handleSubmit: () => void }) => {
   return (
     <FormControl onSubmit={handleSubmit}>
+      <Heading>Sign up</Heading>
       <InputControl required label="email" name={'email'} />
-      <InputControl label="password" name={'password'} />
-      <Button type={'submit'}>submit</Button>
+      <InputControl type={'password'} required label="password" name={'password'} />
+      <Button variant="outlined" type="submit">
+        submit
+      </Button>
+      <RedirectToForm gap={8}>
+        Don't have an account?{' '}
+        <Link href="/login" underline="always">
+          Sign In
+        </Link>
+      </RedirectToForm>
     </FormControl>
   );
 };
-
-const AuthContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-
-  form {
-    margin-top: 40px;
-    padding: 40px;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    border-radius: 8px;
-    gap: 20px;
-    border: 1px solid #ffffff1c;
-  }
-`;
