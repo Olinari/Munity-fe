@@ -6,7 +6,7 @@ import { GroupChat } from '@/pages/dashboard';
 
 export default () => {
   const { data: groups, isLoading: isGroupsLoading } = useQuery(
-    'group',
+    'gsroup',
     async () => await getGroupsData()
   );
   console.log(groups);
@@ -20,7 +20,5 @@ export default () => {
 };
 
 const Group = ({ _id, subject }: { _id: string; subject: string }) => (
-  <div>
-    <NavLink to={`/${_id}`}>{subject}</NavLink>
-  </div>
+  <NavLink to={`/${_id}`}>{subject}</NavLink>
 );
