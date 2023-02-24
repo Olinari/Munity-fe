@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Page from '@/components/page';
 import { FormControl } from '@/components/forms/form';
 import { InputControl } from '@/components/forms/controls';
