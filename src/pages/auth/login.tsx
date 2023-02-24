@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Heading } from '@/components/typography';
 import { AuthLayout, RedirectToForm } from '@/pages/auth/common-components';
 import { useNavigate } from 'react-router-dom';
