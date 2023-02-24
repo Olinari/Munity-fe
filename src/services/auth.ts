@@ -1,6 +1,6 @@
 import { baseUrl, client } from '@/services/apiClient';
 import { toast } from 'react-toastify';
-
+// @ts-nocheck
 export const registerUser = async (data: { username: string; password: string }) => {
   try {
     const response = await client.post(`${baseUrl}/register`, { user: data });

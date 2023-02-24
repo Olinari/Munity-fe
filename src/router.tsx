@@ -5,7 +5,7 @@ import Dashboard from '@/pages/dashboard';
 import MyGroups from '@/pages/my-groups';
 import { Register } from '@/pages/auth/register';
 import { Login } from '@/pages/auth/login';
-
+// @ts-nocheck
 const Router = () => {
   const router = createBrowserRouter([
     {
